@@ -1,0 +1,12 @@
+# ~/.config/agents/coder/config.yaml
+# aichat coder agent config file
+# Author: Ludovic Kuzma
+
+# See: https://github.com/sigoden/aichat/blob/main/config.agent.example.yaml
+
+# Only Caldera:Pro supports function-calling features used by the coder agent
+model: Caldera:Pro
+# Control randomness of the next token choice (0: consistent, 1: imaginative)
+temperature: 0.4
+# Not supported by this model
+top_p: null

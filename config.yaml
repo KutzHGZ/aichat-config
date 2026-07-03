@@ -1,0 +1,34 @@
+# ~/.config/aichat/config.yaml
+# aichat global config file
+# Author: Ludovic Kuzma
+
+# See: https://github.com/sigoden/aichat/blob/main/config.example.yaml
+
+model: Caldera:Coder
+# Control randomness of the next token choice (0: consistent, 1: imaginative)
+temperature: 0.2
+# Nucleus sampling parameter: probability to choose the next token (0: safe, 1:more varied)
+top_p: null
+
+# Enable function calling
+function_calling: true
+# Always save the current session
+save_session: true
+# Use stream style API
+steam: true
+
+keybindings: emacs
+wrap: 100
+wrap_code: false
+
+highlight: true
+theme: dark
+
+clients:
+- type: openai-compatible
+  name: Caldera
+  api_base: <url>
+  api_key: <token>
+  models:
+  - name: Coder
+  - name: Pro
