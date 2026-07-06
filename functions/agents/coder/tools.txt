@@ -8,6 +8,7 @@ fs_rmdir.sh
 fs_mkfile.sh
 fs_rmfile.sh
 fs_patchfile.sh
+fs_appendfile.sh
 git_init.sh
 git_status.sh
 git_log.sh
@@ -16,4 +17,5 @@ git_restore.sh
 git_commit.sh
 git_show.sh
 git_diff.sh
+git_blame.sh
 sh_exec.sh

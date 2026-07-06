@@ -7,4 +7,5 @@ git_status.sh
 git_log.sh
 git_show.sh
 git_diff.sh
+git_blame.sh
 sh_exec.sh

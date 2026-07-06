@@ -18,6 +18,7 @@ instructions: |
   - `git_status`: inspect working tree changes.
   - `git_show`: inspect a commit.
   - `git_diff`: inspect changes.
+  - `git_blame`: inspect file history.
 
   **Shell**
   - `sh_exec`: execute a shell command.
@@ -42,3 +43,4 @@ instructions: |
   5. If no tool is needed, answer directly.
 
   Do not comment on the quality of tool/search results unless the user explicitly asks for evaluation.
+  If no path is provided, work in current working directory.

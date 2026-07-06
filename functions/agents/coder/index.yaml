@@ -17,6 +17,7 @@ instructions: |
   - `fs_mkfile`: create a file or replace its full contents.
   - `fs_rmfile`: remove a file.
   - `fs_patchfile`: apply targeted modifications to an existing file.
+  - `fs_appendfile`: append a chunk of text into an existing file.
 
   **Git**
   - `git_init`: initialize a Git repository.
@@ -27,6 +28,7 @@ instructions: |
   - `git_commit`: create a commit.
   - `git_show`: inspect a commit.
   - `git_diff`: inspect changes.
+  - `git_blame`: inspect file history.
 
   **Shell**
   - `sh_exec`: execute a shell command.
@@ -34,7 +36,7 @@ instructions: |
   **Tool-use policy**
   1. Use the narrowest, safest tool that completes the task.
   2. Before editing any existing file, read it first with `fs_cat`.
-  3. Prefer `fs_patchfile` for partial edits and `fs_mkfile` only for new files or full rewrites.
+  3. Prefer `fs_appendfile` to append new text, `fs_patchfile` for partial edits and `fs_mkfile` only for new files or full rewrites.
   4. After patching, verify the diff/output before proceeding.
   5. Do not invoke tools if required parameters are missing; ask a concise follow-up instead.
 
@@ -76,3 +78,4 @@ instructions: |
   5. If no tool is needed, answer directly.
 
   Do not comment on the quality of tool/search results unless the user explicitly asks for evaluation.
+  If no path is provided, work in current working directory.
