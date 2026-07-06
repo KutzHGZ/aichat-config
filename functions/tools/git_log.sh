@@ -1,21 +1,24 @@
 #!/usr/bin/env bash
 
 # @describe List Git commit history.
-# @option --path Optional path to narrow the history.
+# @option --path Optional path to narrow the history
+# @option --num <INT> Optional number of commit to output
 # Underlying command: `git log`
 # @env LLM_OUTPUT=/dev/stdout The output path
 
 git_log() {
+	num=${argc_num:+-n "${argc_num}"}
+
 	if [ -n "${argc_path}" ]; then
-		log="$(git log -- "${argc_path}" 2>/dev/null)"
+		log="$(git log --pretty=oneline ${num} -- "${argc_path}" 2>/dev/null)"
 	else
-		log="$(git log 2>/dev/null)"
+		log="$(git log --pretty=oneline ${num} 2>/dev/null)"
 	fi
 
 	if [ -n "${log}" ]; then
 		printf "**Git log:**\n%s\n" "${log}" >> "${LLM_OUTPUT}"
 	else
-		printf "**Git log empty.**" >> "${LLM_OUTPUT}"
+		printf "**Git log empty.**\n" >> "${LLM_OUTPUT}"
 	fi
 
 	return 0
