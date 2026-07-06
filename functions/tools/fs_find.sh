@@ -4,17 +4,14 @@
 # @option --path! The directory path to search
 # @option --name Optional wildcard name of the directory or file to find
 # @option --depth <INT> Optional maximum directory depth search level
-# Underlying command: `find -maxdepth -iname`
+# Underlying command: `find -maxdepth -iname -print`
 # @env LLM_OUTPUT=/dev/stdout The output path
 
 fs_find() {
-	depth=${argc_depth:+-maxdepth "${argc_depth}"}
+	name_opt=(${argc_name:+-iname "${argc_name}"})
+	depth_opt=(${argc_depth:+-maxdepth "${argc_depth}"})
 
-	if [ -n "${argc_name}" ]; then
-		found="$(find "${argc_path}" ${depth} -iname "${argc_name}" -print 2>/dev/null)"
-	else
-		found="$(find "${argc_path}" ${depth} -print 2>/dev/null)"
-	fi
+	found="$(find "${argc_path}" "${depth_opt[@]}" "${name_opt[@]}" -print 2>/dev/null)"
 
 	if [ -n "${found}" ]; then
 		printf "**Files and directories found:**\n%s\n" "${found}" >> "${LLM_OUTPUT}"

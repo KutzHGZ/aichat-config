@@ -9,11 +9,11 @@
 
 git_blame() {
 	if [ -n "${argc_start}" ] || [ -n "${argc_end}" ]; then
-		range="${argc_start},${argc_end}"
+		range_opt=(-L "${argc_start}","${argc_end}")
 	fi
 
 	if [ -f "${argc_path}" ]; then
-		blame="$(git blame ${range:+-L $range} -- "${argc_path}" 2>/dev/null)"
+		blame="$(git blame "${range_opt[@]}" -- "${argc_path}" 2>/dev/null)"
 	fi
 
 	if [ -n "${blame}" ]; then

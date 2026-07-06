@@ -7,12 +7,12 @@
 # @env LLM_OUTPUT=/dev/stdout The output path
 
 git_log() {
-	num=${argc_num:+-n "${argc_num}"}
+	num_opt=(${argc_num:+-n "${argc_num}"})
 
 	if [ -n "${argc_path}" ]; then
-		log="$(git log --pretty=oneline ${num} -- "${argc_path}" 2>/dev/null)"
+		log="$(git log --pretty=oneline "${num_opt[@]}" -- "${argc_path}" 2>/dev/null)"
 	else
-		log="$(git log --pretty=oneline ${num} 2>/dev/null)"
+		log="$(git log --pretty=oneline "${num_opt[@]}" 2>/dev/null)"
 	fi
 
 	if [ -n "${log}" ]; then
