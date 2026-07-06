@@ -15,7 +15,7 @@ git_status() {
 	if [ -n "${status}" ]; then
 		printf "**Git status:**\n%s\n" "${status}" >> "${LLM_OUTPUT}"
 	else
-		printf "**Git status empty.**" >> "${LLM_OUTPUT}"
+		printf "**Git status empty.**\n" >> "${LLM_OUTPUT}"
 	fi
 }
 

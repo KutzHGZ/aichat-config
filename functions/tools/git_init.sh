@@ -12,7 +12,7 @@ git_init() {
 		# Print error log to the usr
 		>&2 printf "git_init: unable to create repository: '%s'\n" "${argc_path}"
 
-		printf "**Failed to create Git repository.**" >> "${LLM_OUTPUT}"
+		printf "**Failed to create Git repository.**\n" >> "${LLM_OUTPUT}"
 	fi
 
 	return 0

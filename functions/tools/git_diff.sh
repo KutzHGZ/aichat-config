@@ -15,7 +15,7 @@ git_diff() {
 	if [ -n "${gtdiff}" ]; then
 		printf "**Git diff:**\n%s\n" "${gtdiff}" >> "${LLM_OUTPUT}"
 	else
-		printf "**Git diff empty.**" >> "${LLM_OUTPUT}"
+		printf "**Git diff empty.**\n" >> "${LLM_OUTPUT}"
 	fi
 
 	return 0

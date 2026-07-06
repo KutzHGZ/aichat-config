@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # @describe Create a new directory at the specified path.
-# @option --path! The p$ath of the directory to create
+# @option --path! The path of the directory to create
 # Underlying command: `mkdir -p`
 # @env LLM_OUTPUT=/dev/stdout The output path
 

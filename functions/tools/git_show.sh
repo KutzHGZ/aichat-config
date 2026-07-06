@@ -15,7 +15,7 @@ git_show() {
 	if [ -n "${show}" ]; then
 		printf "**Git show:**\n%s\n" "${show}" >> "${LLM_OUTPUT}"
 	else
-		printf "**Git show empty.**" >> "${LLM_OUTPUT}"
+		printf "**Git show empty.**\n" >> "${LLM_OUTPUT}"
 	fi
 
 	return 0

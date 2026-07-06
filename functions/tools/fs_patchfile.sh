@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # @describe Apply a patch to a file at the specified path.
-# This can be used to edit the file, without having to rewrite the whole file.
-# @option --path! The path of the file to apply to
+# This can be used to edit the file, without having to rewrite the entire file.
+# @option --path! The path of the file to apply the patch
 # @option --content! The patch to apply to the file
 #
 # Here is an example of a patch block that can be applied to modify the file to request the user's name:
@@ -43,11 +43,11 @@ fs_patchfile() {
 			return 1
 		fi
 
-		printf "%s" "${new_content}" > "${argc_path}"
+		printf "%s" "${new_content}" > "${argc_path}" 2>/dev/null
 
-		printf "**Patch applied to:** %s\n" "${argc_path}\n" >> "${LLM_OUTPUT}"
+		printf "**Patch applied to:** %s\n" "${argc_path}" >> "${LLM_OUTPUT}"
 	else
-		printf "**Failed to applied patch to:** %s\n" "${argc_path}" >> "${LLM_OUTPUT}"
+		printf "**Failed to apply patch to:** %s\n" "${argc_path}" >> "${LLM_OUTPUT}"
 	fi
 
 	return 0

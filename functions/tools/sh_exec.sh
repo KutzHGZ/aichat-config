@@ -27,7 +27,7 @@ sh_exec() {
 		cmd_result="failed (exit code: $?)"
 
 		# Print error log to the user
-		>&2 printf "sh_exec: unable to execute command '%s'\n" "${cmd_result}"
+		>&2 printf "sh_exec: unable to execute command '%s'\n" "${argc_command}"
 	fi
 
 	if [ -n "${cmd_output}" ]; then

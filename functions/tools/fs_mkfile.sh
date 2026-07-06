@@ -2,7 +2,7 @@
 
 # @describe Create a new file at the specified path with an optional content.
 # @option --path! The path where the file should be created
-# @option --content The content of the file
+# @option --content Optional file contents
 # @env LLM_OUTPUT=/dev/stdout The output path
 
 fs_mkfile() {
@@ -11,7 +11,7 @@ fs_mkfile() {
 		"${argc_path}" "Create file '${argc_path}'?" || return
 
     if mkdir -p "$(dirname "${argc_path}")" 2>/dev/null; then
-		printf "%s" "${argc_content}" > "${argc_path}"
+		printf "%s" "${argc_content}" > "${argc_path}" 2>/dev/null
 		printf "**File created:** %s\n" "${argc_path}" >> "${LLM_OUTPUT}"
 	else
 		# Print error log to the user
