@@ -14,21 +14,24 @@ fs_appendfile() {
 			"${argc_path}" "Append to file '${argc_path}'?" || return
 
 		if [ -n "${argc_line}" ]; then
-			orig_content="$(cat "${argc_path}")"
+			# Trailing new lines are stipped when capturing command outputs
+			# This is not wished when manipulating file content,
+			# we workaround by printing "." at the end, then remove it.
+			orig_content="$(cat "${argc_path}" && printf ".")"
 
 			if [ "${argc_line}" -le 1 ]; then
 				(
 					printf "%s" "${argc_content}"
-					printf "%s" "${orig_content}"
+					printf "%s" "${orig_content%?}"
 				) > "${argc_path}" 2>/dev/null
 			else
 				(
 					let "h = argc_line - 1"
 					let "t = argc_line"
 
-					printf "%s" "${orig_content}" | head -n "${h}"
+					printf "%s" "${orig_content%?}" | head -n "${h}"
 					printf "%s" "${argc_content}"
-					printf "%s" "${orig_content}" | tail -n "+${t}"
+					printf "%s" "${orig_content%?}" | tail -n "+${t}"
 				) > "${argc_path}" 2>/dev/null
 			fi
 		else
