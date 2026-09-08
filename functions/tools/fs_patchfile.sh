@@ -2,13 +2,16 @@
 
 # @describe Apply a patch to a file at the specified path.
 # This can be used to edit the file, without having to rewrite the entire file.
-# @option --path! The path of the file to apply the patch
-# @option --content! The patch to apply to the file
+# @option --path! The path of the file to apply the patch to
+# @option --content! The unified context diff format patch to apply
+# Underlying command: `patch -f -l -p1 -F 10`
 #
-# Here is an example of a patch block that can be applied to modify the file to request the user's name:
+# Here is an example of a patch block (unified context diff format)
+# that can be applied to modify the file to request the user's name:
+# ```diff
 # --- a/main.cpp
 # +++ b/main.cpp
-# \@@ -1,8 +1,12 @@
+# \@@ -1,7 +1,11 @@
 #  #include <iostream>
 #  int
 # -main()
@@ -22,17 +25,33 @@
 # +
 #         return EXIT_SUCCESS;
 #  }
+# ```
 #
 # @env LLM_OUTPUT=/dev/stdout The output path
 
 fs_patchfile() {
     if [ -f "${argc_path}" ]; then
-		if ! new_content="$(awk -f "${LLM_ROOT_DIR}/utils/patch.awk" "${argc_path}" <(printf "%s" "${argc_content}"))"; then
-			printf "**Invalid patch format.**\n" >> "${LLM_OUTPUT}"
+		patch_cmd=(patch -f -l -p1 -F 10 -r - -i - -o - "${argc_path}")
+
+		# Trailing new lines are stipped when capturing command outputs
+		# This is not wished when manipulating file content,
+		# we workaround by printing "." at the end, then remove it.
+		if ! new_content="$(printf "%s" "${argc_content}" | "${patch_cmd[@]}" 2>/dev/null && printf ".")"; then
+			error_msg="$(printf "%s" "${argc_content}" | "${patch_cmd[@]}" 2>&1 >/dev/null)"
+
+			# Print error log to the user
+			>&2 printf "fs_patchfile: '%s'\n" "${error_msg}"
+
+			# Log the error to the LLM
+			printf "**Failed to apply patch:**\n%s\n" "${argc_content}" >> "${LLM_OUTPUT}"
+			printf "**Error:**\n%s\n" "${error_msg}" >> "${LLM_OUTPUT}"
 			return 0
 		fi
 
-		printf "%s" "${new_content}" | git diff --no-index "${argc_path}" - || true
+		if printf "%s" "${new_content%?}" | git diff --no-index --exit-code -- "${argc_path}" -; then
+			printf "**Patch applied with no modifications.**\n" >> "${LLM_OUTPUT}"
+			return 0
+		fi
 
 		# Guard file modifications
 		if ! "${LLM_ROOT_DIR}/utils/guard_operation.sh" "Apply changes?"; then
@@ -43,7 +62,7 @@ fs_patchfile() {
 			return 1
 		fi
 
-		printf "%s" "${new_content}" > "${argc_path}" 2>/dev/null
+		printf "%s" "${new_content%?}" > "${argc_path}" 2>/dev/null
 
 		printf "**Patch applied to:** %s\n" "${argc_path}" >> "${LLM_OUTPUT}"
 	else
