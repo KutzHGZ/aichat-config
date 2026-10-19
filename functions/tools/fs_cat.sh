@@ -17,11 +17,11 @@ fs_cat() {
 	fi
 
 	if [ -n "${argc_head}" ]; then
-		content="$(printf "%s" "${content%?}" | head -n "${argc_head}" 2>/dev/null)"
+		content="$(printf "%s" "${content}" | head -n "${argc_head}" 2>/dev/null)"
 	fi
 
 	if [ -n "${argc_tail}" ]; then
-		content="$(printf "%s" "${content%?}" | tail -n "${argc_tail}" 2>/dev/null)"
+		content="$(printf "%s" "${content}" | tail -n "${argc_tail}" 2>/dev/null)"
 	fi
 
 	printf "**File content:**\n%s\n" "${content%?}" >> "${LLM_OUTPUT}"
