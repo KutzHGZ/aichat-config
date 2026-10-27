@@ -1,0 +1,12 @@
+# ~/.config/agents/reviewer/config.yaml
+# aichat reviewer agent config file
+# Author: Ludovic Kuzma
+
+# See: https://github.com/sigoden/aichat/blob/main/config.agent.example.yaml
+
+# Model Provider:Pro does a better job calling the needed functions than Provider:Coder
+model: Provider:Pro
+# Control randomness of the next token choice (0: consistent, 1: imaginative)
+temperature: 0.6
+# Nucleus sampling parameter: probability to choose the next token (0: safe, 1:more varied)
+top_p: 0.2
