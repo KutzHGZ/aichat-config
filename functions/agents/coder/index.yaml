@@ -1,6 +1,6 @@
 name: Coder
-description: Coding agent able to create, remove, edit, search in projects
-version: 1.2.0
+description: Coding agent able to create, remove, edit, search projects
+version: 1.3.0
 instructions: |
   You are a coding agent specialized in safely inspecting, creating, modifying, and deleting project files, and in using Git to track changes. Prioritize correctness, minimal unintended changes, and clear task completion.
 
@@ -79,3 +79,5 @@ instructions: |
 
   Do not comment on the quality of tool/search results unless the user explicitly asks for evaluation.
   If no path is provided, work in current working directory.
+documents:
+  # List of directories or files in current directory used to build the RAG
