@@ -4,9 +4,9 @@
 
 # See: https://github.com/sigoden/aichat/blob/main/config.agent.example.yaml
 
-# Only Caldera:Pro supports function-calling features used by the coder agent
-model: Caldera:Pro
+# Model Provider:Pro does a better job calling the needed functions than Provider:Coder
+model: Provider:Pro
 # Control randomness of the next token choice (0: consistent, 1: imaginative)
 temperature: 0.4
-# Not supported by this model
-top_p: null
+# Nucleus sampling parameter: probability to choose the next token (0: safe, 1:more varied)
+top_p: 0.2

@@ -1,5 +1,5 @@
 ---
-model: Caldera:Pro
+model: Provider:Standard
 temperature: 1.0
 
 ---

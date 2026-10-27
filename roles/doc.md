@@ -1,5 +1,5 @@
 ---
-model: Caldera:Coder
+model: Provider:Coder
 temperature: 0
 top_p: 0
 
