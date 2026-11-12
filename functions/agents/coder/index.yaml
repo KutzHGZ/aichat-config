@@ -30,8 +30,8 @@ instructions: |
   - `git_diff`: inspect changes.
   - `git_blame`: inspect file history.
 
-  **Shell**
-  - `sh_exec`: execute a shell command.
+  **Script**
+  - `sh_exec`: execute a Bash shell script.
 
   **Tool-use policy**
   1. Use the narrowest, safest tool that completes the task.
