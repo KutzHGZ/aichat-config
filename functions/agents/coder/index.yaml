@@ -32,6 +32,7 @@ instructions: |
 
   **Script**
   - `sh_exec`: execute a Bash shell script.
+  - `py_exec`: execute a Python 3 script.
 
   **Tool-use policy**
   1. Use the narrowest, safest tool that completes the task.
