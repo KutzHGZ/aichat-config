@@ -11,6 +11,19 @@ temperature: 0.2
 # Nucleus sampling parameter: probability to choose the next token (0: safe, 1:more varied)
 top_p: null
 
+# Always save the current session
+save_session: true
+# Use stream style API
+stream: true
+
+# Output style
+theme: dark
+highlight: true
+wrap: 120
+wrap_code: false
+
+keybindings: emacs
+
 # Enable function calling
 function_calling: true
 
@@ -30,34 +43,30 @@ rag_template: |
 
   __INPUT__
 
-# Always save the current session
-save_session: true
-# Use stream style API
-steam: true
-
-keybindings: emacs
-wrap: 120
-wrap_code: false
-
-highlight: true
-theme: dark
-
 clients:
 - type: openai-compatible
   name: Provider
   api_base: <url>
   api_key: <token>
   models:
+    # Default Provider models
   - name: Standard
     max_input_tokens: 100000
-    supports_function_calling: true
+    supports_function_calling: false
   - name: Coder
     max_input_tokens: 100000
-    supports_function_calling: true
+    supports_function_calling: false
   - name: Pro
     max_input_tokens: 100000
-    supports_function_calling: true
+    supports_function_calling: false
   - name: Embeddings
     type: embedding
     default_chunk_size: 1500
     max_batch_size: 100
+    # Agent model: using Provider:Pro
+  - name: Agent
+    real_name: Pro
+    max_input_tokens: 100000
+    supports_function_calling: true
+    # Disabling stream API since it causes issues with function calling
+    no_stream: true
