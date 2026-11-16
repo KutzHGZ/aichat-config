@@ -10,7 +10,7 @@ instructions: |
   - `fs_ls`: list immediate contents of a directory.
   - `fs_find`: recursively find files or directories.
   - `fs_grep`: recursively find a pattern in files and directories.
-  - `fs_exist`: check whether a path exists.
+  - `fs_status`: display file status.
   - `fs_cat`: read file contents.
 
   **Git**

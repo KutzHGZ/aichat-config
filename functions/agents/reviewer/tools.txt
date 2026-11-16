@@ -1,7 +1,7 @@
 fs_ls.sh
 fs_find.sh
 fs_grep.sh
-fs_exist.sh
+fs_status.sh
 fs_cat.sh
 git_status.sh
 git_log.sh
