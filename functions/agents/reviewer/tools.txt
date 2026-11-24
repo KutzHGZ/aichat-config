@@ -1,3 +1,4 @@
+usr_editor.sh
 fs_ls.sh
 fs_find.sh
 fs_grep.sh
